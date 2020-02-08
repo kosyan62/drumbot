@@ -1,7 +1,10 @@
 from PIL import Image
+import random
 
-im1 = Image.open('cuted/firstpart/14.jpg')
-im2 = Image.open('cuted/secondpart/22.jpg')
+i1 = random.randint(1, 15)
+i2 = random.randint(16, 22)
+im1 = Image.open("cuted/firstpart/%i.jpg" % i1)
+im2 = Image.open('cuted/secondpart/%i.jpg' % i2)
 width = im2.width + im1.width
 final = Image.new(mode = "RGB", size = (width, 150), color = (255,255,255))
 bl_h1 = im1.height - 1
