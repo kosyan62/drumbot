@@ -1,11 +1,29 @@
 from PIL import Image
 import random
+import os
+from randomrhytm import make_images
+import errno
 
-img = Image.open('groove.jpg')
+try:
+    os.makedirs('tmp')
+except OSError as e:
+    if e.errno != errno.EEXIST:
+        raise
+try:
+    img = Image.open('groove.jpg')
+except:
+    print("Fatal error\n can't open groove.jpg")
 img = img.rotate(-0.5)
-img.save("rotated.jpg")
-
-im = Image.open('rotated.jpg')
+try:
+    img.save("tmp/tmp.jpg")
+except:
+    print("Error\nCan't save tmp.jpg")
+    exit
+try:
+    im = Image.open('tmp/tmp.jpg')
+except:
+    print("Fatal error\n Can't open tmp.jpg")
+    exit
 
 list = [215, 715, 1185]
 x = 1
@@ -14,12 +32,17 @@ for width in list:
     height = 400
     while (height < 1200):
         cordinate = width, height
-        px = im.getpixel(cordinate)
+        try:
+            px = im.getpixel(cordinate)
+        except:
+            print(f"Fatal error\nCan't get pixel {coordinate} from tmp.jpg")
         if (px == (0, 0, 0)):
-            cr_im = im.crop((width - 15, height - 50, width + 315, height + 100))
-            print("first step done with %s part" % x)
-            height = height + 60
-            cr_im.save('firstpart/%s.jpg' % x)
+            try:
+                cr_im = im.crop((width - 15, height - 50, width + 315, height + 100))
+                height = height + 60
+                cr_im.save('tmp/firstpart%s.jpg' % x)
+            except:
+                print(f"Error\nCan't cat image {x}")
             x = x + 1
         else:
             height = height + 1
@@ -32,45 +55,64 @@ for width in list:
     height = 1430
     while (height < 1900):
         cordinate = width, height
-        px = im.getpixel(cordinate)
+        try:
+            px = im.getpixel(cordinate)
+        except:
+            print(f"Fatal error\nCan't get pixel {coordinate} from tmp.jpg")
         if (px == (0, 0, 0)):
-            cr_im = im.crop((width - 14, height - 50, width + 315, height + 100))
-            print("second step done with  %s part" % x)
-            height = height + 60
-            cr_im.save('secondpart/%s.jpg' % x)
+            try:
+                cr_im = im.crop((width - 15, height - 50, width + 315, height + 100))
+                height = height + 60
+                cr_im.save('tmp/secondpart%s.jpg' % x)
+            except:
+                print(f"Error\nCan't cat image {x}")
             x = x + 1
         else:
             height = height + 1
 
-print("temp photos done")
+print("Temp images done")
 for i in range(1, 16):
-    filename = "firstpart/%s.jpg" % i
-    im = Image.open(filename)
+    filename = "tmp/firstpart%s.jpg" % i
+    try:
+        im = Image.open(filename)
+    except:
+        print(f"Error\nCan't open {filename} to cut half")
     height = 30
     width = 150
 
     while (width < 230):
         cordinates = width, height
-        px = im.getpixel(cordinates)
-        if px < (50, 50, 50):
-            im_cut = im.crop((0, 0, width - 15, im.height))
-            im_cut.save('cuted/firstpart/%s.jpg' % i)
-            print("First part of cuted photo done. number %s" % i)
+        try:
+            px = im.getpixel(cordinates)
+            if px < (50, 50, 50):
+                im_cut = im.crop((0, 0, width - 20, im.height))
+                im_cut.save('tmp/cutedfirstpart%s.jpg' % i)
+                break
+        except:
+            print(f"Error\ncan't cut half image {i}")
             break
         width += 1
 
 for i in range(16, 23):
-    filename = "secondpart/%s.jpg" % i
-    im = Image.open(filename)
+    filename = "tmp/secondpart%s.jpg" % i
+    try:
+        im = Image.open(filename)
+    except:
+        print(f"Error\nCan't open {filename} to cut half")
     height = 30
     width = 150
 
     while (width < 230):
         cordinates = width, height
-        px = im.getpixel(cordinates)
-        if px < (50, 50, 50):
-            im_cut = im.crop((width - 17, 0, im.width, im.height))
-            im_cut.save('cuted/secondpart/%s.jpg' % i)
-            print("Second part of cuted photo done. number %s" % i)
+        try:
+            px = im.getpixel(cordinates)
+            if px < (50, 50, 50):
+                im_cut = im.crop((width - 17, 0, im.width, im.height))
+                im_cut.save('tmp/cutedsecondpart%s.jpg' % i)
+                break
+        except:
+            print(f"Error\ncan't cut half image {i}")
             break
         width += 1
+print("All images done")
+make_images()
