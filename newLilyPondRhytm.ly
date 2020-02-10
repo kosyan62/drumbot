@@ -11,8 +11,8 @@
   scoreTitleMarkup = ##f
 }
 
-up = \drummode { hh8 hh hh hh <hh snare> hh hh hh hh8 hh hh hh <hh snare> hh hh hh hh8 hh hh hh <hh snare> hh hh hh hh8 hh hh hh <hh snare> hh hh hh  }
-down = \drummode {  bassdrum4   r8 bassdrum8 \skip 8 bassdrum8 bassdrum4    r8 bassdrum8 r8 bassdrum8 \skip 8 bassdrum8 r8 bassdrum8  r4   bassdrum4   \skip 8 bassdrum8 bassdrum4    bassdrum4   r8 bassdrum8 \skip 8 bassdrum8 bassdrum8 bassdrum8  }
+up = \drummode { hh8 hh hh hh <hh> hh hh hh  }
+down = \drummode {  r4   r8 bassdrum8 snare4   bassdrum8 bassdrum8  }
     \new DrumStaff <<
     \set DrumStaff.drumStyleTable = #(alist->hash-table mydrums)
     \new DrumVoice { \voiceOne \up }

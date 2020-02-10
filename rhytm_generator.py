@@ -17,19 +17,14 @@ def get_drumbit_str():
     for element in lis1:
         one = Note(8, element)
         rhytm.append_note(one)
-    del lis1
-    ret = ""
     ret = rhytm.get_string()
-    print(rhytm.get_len())
     del rhytm
-    ret = ret.replace('snare', '\\skip ')
-    del i
-    print(ret)
+    #ret = ret.replace('snare', '\\skip ')
     return ret
 
 def get_hh_str():
     if random.choice([True, False, True]):
-        str ="hh4 hh <hh snare> hh "
+        str ="hh4 hh <hh> hh "
     else:
-        str = "hh8 hh hh hh <hh snare> hh hh hh "
+        str = "hh8 hh hh hh <hh> hh hh hh "
     return str

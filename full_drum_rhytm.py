@@ -4,7 +4,7 @@ import tempfile
 from pdf2image import convert_from_path, convert_from_bytes
 import rhytm_generator
 
-hard = 3
+hard = 1
 hihat = rhytm_generator.get_hh_str()
 fin = (rhytm_generator.get_drumbit_str())
 if hard == 2:
