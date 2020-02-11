@@ -1,6 +1,6 @@
 from note import Note
 from notation import Notation
-from paradidl import Paradidl
+from rudiments import Rudiments
 
-obj = Paradidl()
-print(obj.get_val("didl",3))
+obj = Rudiments()
+print(obj.get_val_half("pair", "left"))

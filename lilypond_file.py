@@ -4,8 +4,7 @@ def get_lilypond_drum_file(line1, line2):
 (hihat           cross     #f           4)))
 \version "2.18.2"
 \paper{
-  indent=0\mm
-  line-width=120\mm
+  indent=10\mm
   oddFooterMarkup=##f
   oddHeaderMarkup=##f
   bookTitleMarkup = ##f

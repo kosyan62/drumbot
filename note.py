@@ -1,13 +1,16 @@
 class Note:
-    _dur = 0
-    _name = 'r'
     
     def __init__(self, n, s):
         self._dur = n
         self._name = s
+        self._dot = False
 
     def __str__(self):
-        return "%s%s" % (self._name,self._dur)
+        tmp = "%s%s" % (self._name,self._dur)
+        ret = ''
+        if self._dot == True:
+            ret = tmp + '.'
+        return ret
 
     def set_value(self, ch):
         self._name = ch
@@ -16,10 +19,11 @@ class Note:
         self._dur = d
 
     def get_full(self):
-        if self._name != ' ':
-            return ("%s%s" % (self._name, self._dur))
-        else:
-            return ' '
+        tmp = "%s%s" % (self._name,self._dur)
+        ret = ''
+        if self._dot == True:
+            tmp = tmp + '.'
+        return tmp
 
     def get_name(self):
         return self._name
@@ -27,3 +31,8 @@ class Note:
     def get_duration(self):
             return (self._dur)
 
+    def less_duration(self):
+        self._dur = self._dur // 2
+
+    def add_dot(self):
+        self._dot = True
