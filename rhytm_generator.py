@@ -1,21 +1,21 @@
 import random
 from  randweight import weight
 from note import Note
-from notation import Notation
+import notation
 
 def get_drumbit_str():
     x = weight()
-    rhytm = Notation()
+    rhytm = []
     for i in range(x):
-        nt = Note(16,'bassdrum')
+        nt = Note(16, 'bassdrum')
         rhytm.append(nt)
     while len(rhytm) < 7:
         nt = Note(16, 'r')
         rhytm.append(nt)
-    rhytm.shuffle()
+    random.shuffle(rhytm)
     nt = Note(16, 'snare')
     rhytm.insert(4, nt)
-    ret = rhytm.get_string()
+    ret = notation.get_string(rhytm)
     return ret
 
 def get_hh_str():
