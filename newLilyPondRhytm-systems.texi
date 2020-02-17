@@ -1,0 +1,2 @@
+@image{newLilyPondRhytm-1}
+@c eof

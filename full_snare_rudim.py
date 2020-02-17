@@ -1,6 +1,27 @@
 from note import Note
 from notation import Notation
 from rudiments import Rudiments
+from lilypond_file import get_lilypond_drum_file
+import random
+import subprocess
 
+fill = Notation()
 obj = Rudiments()
-print(obj.get_val_half("pair", "left"))
+arr = obj.get_random_rudim()
+str = ""
+for l in arr:
+    str += l;
+arr = str[:16] + (str[16:] and "")
+arr = list(arr)
+for i in arr:
+    hit = Note(16, 'snare')
+    hit.add_hand(i)
+    fill.append(hit)
+for i in range(4):
+    l = random.randint(1,4)
+    fill.add_accent((i * 4) + l)
+snare =  fill.get_string()
+filename = get_lilypond_drum_file(snare, "")
+subprocess.call(['lilypond', '-dbackend=eps', '-dno-gs-load-fonts', \
+        '-dinclude-eps-fonts', '--pdf', filename])
+

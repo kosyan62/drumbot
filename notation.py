@@ -10,6 +10,7 @@ class Notation:
     def __str__(self):
         str = "Notes list: "
         for s in self._list:
+            print(s.get_full())
             str += s.get_full() + ' '
         return str
 
@@ -58,3 +59,7 @@ class Notation:
 
     def shuffle(self):
         random.shuffle(self._list)
+
+    def add_accent(self, i):
+        print(i)
+        self._list[i - 1].add_accent()
