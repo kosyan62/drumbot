@@ -1,5 +1,4 @@
-def get_lilypond_drum_file(line1, line2):
-    str = r"""#(define mydrums '(         
+#(define mydrums '(         
 (bassdrum        default   #f           -3)
 (hihat           cross     #f           4)))
 \version "2.18.2"
@@ -11,15 +10,10 @@ def get_lilypond_drum_file(line1, line2):
   scoreTitleMarkup = ##f
 }
 
-up = \drummode { %s }
-down = \drummode { %s }
+up = \drummode { hh8 hh <hh> hh hh8 hh <hh> hh  }
+down = \drummode {  bassdrum16 bassdrum8 bassdrum16 snare16 bassdrum8.  r16 bassdrum8 bassdrum16 snare4  }
     \new DrumStaff <<
     \set DrumStaff.drumStyleTable = #(alist->hash-table mydrums)
     \new DrumVoice { \voiceOne \up }
     \new DrumVoice { \voiceTwo \down }
->>""" % (line1, line2)
-    filename = 'rhytm.ly'
-    lilyfile = open(filename, "w+")
-    lilyfile.write(str)
-    lilyfile.close()
-    return filename
+>>

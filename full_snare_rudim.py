@@ -1,11 +1,11 @@
 from note import Note
-from notation import Notation
+import notation
 from rudiments import Rudiments
 from lilypond_file import get_lilypond_drum_file
 import random
 import subprocess
 
-fill = Notation()
+fill = []
 obj = Rudiments()
 arr = obj.get_random_rudim()
 str = ""
@@ -19,8 +19,8 @@ for i in arr:
     fill.append(hit)
 for i in range(4):
     l = random.randint(1,4)
-    fill.add_accent((i * 4) + l)
-snare =  fill.get_string()
+    notation.add_accent(fill, (i * 4) + l)
+snare = notation.get_string(fill)
 filename = get_lilypond_drum_file(snare, "")
 subprocess.call(['lilypond', '-dbackend=eps', '-dno-gs-load-fonts', \
         '-dinclude-eps-fonts', '--pdf', filename])
