@@ -11,7 +11,7 @@
 }
 
 up = \drummode { hh8 hh <hh> hh hh8 hh <hh> hh  }
-down = \drummode {  bassdrum16 bassdrum8 bassdrum16 snare16 bassdrum8.  r16 bassdrum8 bassdrum16 snare4  }
+down = \drummode {  bassdrum4 snare4  r8. bassdrum16 snare16 bassdrum16 bassdrum16 bassdrum16  }
     \new DrumStaff <<
     \set DrumStaff.drumStyleTable = #(alist->hash-table mydrums)
     \new DrumVoice { \voiceOne \up }
