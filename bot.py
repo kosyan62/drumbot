@@ -1,4 +1,7 @@
 import telebot
+import os
+import Flask
+
 from telebot import apihelper
 from telebot import types
 
@@ -7,7 +10,9 @@ from full_rudi_rhytm import get_rudiments
 from full_snare_rudim import get_snare
 import config
 
-bot = telebot.TeleBot(config.TOKEN)
+Token = os.getenv("TOKEN")
+bot = telebot.TeleBot(TOKEN)
+server = Flask(__name__)
 
 
 @bot.message_handler(commands=['start'])
@@ -59,4 +64,19 @@ def choose(message):
     elif message.text=='Короткий ритм':
         return_short_rhythm(message)
 
-bot.polling()
+@server.route
+def_get_Message():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
+
+
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook("https://{}.herokuapp.com/{}".format(HEROKU_APP_NAME, TOKEN))
+    return "!", 200
+
+
+if __name__ == "__main__":
+    logger.info("starting bot")
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
