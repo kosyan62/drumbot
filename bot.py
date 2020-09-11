@@ -1,18 +1,21 @@
 import telebot
 import os
-import Flask
+
+from flask import Flask
 
 from telebot import apihelper
 from telebot import types
+from telebot import logging
 
 from full_drum_rhytm import get_rhytm
 from full_rudi_rhytm import get_rudiments
 from full_snare_rudim import get_snare
 import config
 
-Token = os.getenv("TOKEN")
-bot = telebot.TeleBot(TOKEN)
+Token = str(os.getenv("TOKEN"))
+bot = telebot.TeleBot(Token)
 server = Flask(__name__)
+logger = telebot.logger
 
 
 @bot.message_handler(commands=['start'])
@@ -64,8 +67,8 @@ def choose(message):
     elif message.text=='Короткий ритм':
         return_short_rhythm(message)
 
-@server.route
-def_get_Message():
+@server.route('/' + Token, methods=['POST'])
+def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
     return "!", 200
 
@@ -73,7 +76,7 @@ def_get_Message():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook("https://{}.herokuapp.com/{}".format(HEROKU_APP_NAME, TOKEN))
+    bot.set_webhook(url="https://{}.herokuapp.com/{}".format(os.getenv('HEROKU_APP_NAME'), Token))
     return "!", 200
 
 
