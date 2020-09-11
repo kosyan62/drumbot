@@ -15,7 +15,3 @@ def get_rhytm(x):
     image = convert_from_path('rhytm.pdf')
     image[0].save('rhytm.png')
 
-#def get_rudim:
-
-#def get_snare:
-

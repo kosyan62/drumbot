@@ -2,10 +2,11 @@ from note import Note
 import notation
 from rudiments import Rudiments
 from lilypond_file import get_lilypond_drum_file
+from pdf2image import convert_from_path
 import random
 import subprocess
 
-def get_rudiments:
+def get_rudiments():
     fill = []
     obj = Rudiments()
     arr = obj.get_random_rudim()

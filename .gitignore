@@ -1,3 +1,6 @@
 newLilyPondRhytm.*
 *.pyc
 __pycache__
+*.eps
+*.pdf
+config.py

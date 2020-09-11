@@ -1,10 +1,11 @@
 from note import Note
 import notation
 from lilypond_file import get_lilypond_drum_file
+from pdf2image import convert_from_path
 import random
 import subprocess
 
-def get_snare:
+def get_snare():
     fill = []
     arr = "RLRLRLRLRLRLRLRL"
     arr = list(arr)
